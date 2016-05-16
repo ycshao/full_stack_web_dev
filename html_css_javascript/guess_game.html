@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>guess game</title>
+	<script>
+		function do_game()
+		{
+			var colors = ["Aqua", "Black", "Blue", "DarkGray", "DarkOrange", "DodgerBlue", "GreenYellow", "Khaki", "PaleGreen", "SaddleBrown"];
+			var targetIndex = Math.floor(Math.random() * colors.length);
+			var targetColor = colors[targetIndex];
+			var guessCount = 0;
+			while(true)
+			{
+				var input = prompt("I am thinking of one of these colors:\nAqua, Black, Blue, DarkGray, DarkOrange, DodgerBlue, GreenYellow, Khaki, PaleGreen, SaddleBrown\nWhat color am I thinking of?");
+				guessCount++;
+				if (-1 == colors.indexOf(input))
+				{
+					alert("Sorry I don't recognize your color.\nPlease try again.");
+					continue;
+				}
+				else if (input > targetColor)
+				{
+					alert("Sorry your guess is not correct.\nHint: Your color is alphabetically higher than mine.\nPleaase try again.");
+					continue;
+				}
+				else if (input < targetColor)
+				{
+					alert("Sorry your guess is not correct.\nHint: Your color is alphabetically lower than mine.\nPleaase try again.");
+					continue;
+				}
+				else
+				{
+					var myBody=document.getElementsByTagName("body")[0];
+					myBody.style.background = targetColor;
+					alert("Contragulations! You have guessed the color.\nIt took you " + guessCount + " guesses to finish the game.\nYou can see the color in the background.");
+					break;
+				}
+			}
+		}
+	</script>
+</head>
+<body onload="do_game()"></body>
+</html>

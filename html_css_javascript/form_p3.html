@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Week 1</title>
+	<style>
+		fieldset {
+			background: lightyellow;
+			border: 10px solid yellow;
+			margin-bottom: 10px;
+			width: 720px;
+
+		}
+		label {
+			width: 100px;
+			display: inline-block;
+			vertical-align: top;
+			text-align: right; 
+		}
+		label:hover { font-size: 40px }
+		input:hover { font-size: 40px }
+		textarea {
+			width: 360px;
+			height: 50px;
+		}
+		label.cr {
+			width: auto;
+		}
+		label.range {
+			text-align: center;
+		}
+	</style>
+	<script type="text/javascript" src="https://www.cse.ust.hk/~rossiter/dating_web_site.js"></script>
+</head>
+<body>
+<h1>Please Enter Your Details for Our Dating Website!</h1>
+<form>
+	<fieldset>
+		<legend>Your Face</legend>
+		<label for="image">Your image:</label>
+		<input type="file" id="image" name="image" required></input>
+		<br>
+		<label for="preview">Image preview:</label>
+		<img id="preview">
+	</fieldset>
+	<fieldset>
+		<legend>Your General Details</legend>
+		<label for="name">Name:</label>
+		<input type="text" id="name" placeholder="Your Full Name" required></input>
+		<br>
+		<label for="gender">Gender:</label>
+		<input type="radio" id="gender" name="gender" value="0" required><label class="label cr">Male</label></input>
+		<input type="radio" id="gender" name="gender" value="1"><label class="label cr">Female</label></input>
+		<br>
+		<label for="age">Age:</label>
+		<input type="number" id="age" name="age" required=""></input>
+		<br>
+		<label for="dob">Date of birth:</label>
+		<input type="date" id="dob" name="dob"></input>
+		<br>
+		<label for="color">Favorite color:</label>
+		<input type="color" id="color" name="color"></input>
+		<br>
+		<label for="country">Which country:</label>
+		<select> id="country" name="country">
+			<option value="0"></option>
+			<option value="1">America</option>
+			<option value="2">China</option>
+			<option value="3">Japan</option>
+			<option value="4">Thailand</option>
+			<option value="5">United Kingdom</option>
+		</select>
+	</fieldset>
+	<fieldset>
+		<legend>Your Indicators</legend>
+		<label for="heigh">Heigh:</label>
+		<label class="range">Short</label><input type="range" id="heigh" name="heigh" min="0" max="100"></input><label class="label range">Tall</label>
+		<br>
+		<label for="salary">Salary:</label>
+		<label class="label range">Poor</label><input type="range" id="salary" name="salary" min="0" max="100"></input><label class="label range">Rich</label>
+	</fieldset>
+	<fieldset>
+		<legend>Your Contact Information</legend>
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email" required></input>
+		<br>
+		<label for="mobile">Mobile:</label>
+		<input type="text" id="mobile" name="mobile"></input>
+		<br>
+		<label for="address">Address:</label>
+		<textarea id="address" name="address"></textarea>
+		<br>
+		<label for="contact">Method to contact you:</label>
+		<input type="checkbox" id="contact" name="contact" value="0"><label class="label cr">Email</label></input>
+		<input type="checkbox" id="contact" name="contact" value="1"><label class="label cr">Whatsapp</label></input>
+		<input type="checkbox" id="contact" name="contact" value="2"><label class="label cr">In-app chat</label></input>
+	</fieldset>
+	<input type="submit" value="Submit"></input>
+</form>	
+</body>
+</html>
