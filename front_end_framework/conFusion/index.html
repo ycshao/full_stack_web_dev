@@ -63,8 +63,7 @@
                     <li><a href="contactus.html"><i class="fa fa-envelope-o"></i> Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a data-toggle="modal" data-target="#loginModal">
-                    <span class="glyphicon glyphicon-log-in"></span> Login</a>
+                    <li><a id="login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
                     </li>
                 </ul>
             </div>
@@ -110,7 +109,7 @@
                 <h4 class="modal-title">Reserve Table</h4>
             </div>
             <div class="modal-body">
-                <div class="row row-content" id="reserve">
+                <div class="row row-content">
                     <div class="col-xs-12">
                         <form class="form-horizontal" role="form">
                             <div class="form-group">
@@ -196,9 +195,7 @@
                 <div class="col-xs-12 col-sm-2">
                     <p style="padding:40px;"></p>
                     <div class="btn-group" role="group">
-                        <a type="button" class="btn btn-warning btn-block img-responsive"
-                            data-toggle="modal" data-target=#reserveModal>Reserve Table
-                        </a>
+                        <a id="reserve" type="button" class="btn btn-warning btn-block img-responsive">Reserve Table</a>
                     </div>
                 </div>
             </div>
@@ -390,12 +387,20 @@
     <script>
         $(document).ready(function(){
             $("#mycarousel").carousel( { interval: 2000 } );
-                          $("#carousel-pause").click(function(){
+            $("#carousel-pause").click(function(){
                 $("#mycarousel").carousel('pause');
             });
-                        $("#carousel-play").click(function(){
+            $("#carousel-play").click(function(){
                 $("#mycarousel").carousel('cycle');
             });
+        });
+
+        $("#login").on('click', function() {
+            $("#loginModal").modal('show');
+        });
+
+        $("#reserve").on('click', function() {
+            $("#reserveModal").modal('show');
         });
     </script>
 </body>
