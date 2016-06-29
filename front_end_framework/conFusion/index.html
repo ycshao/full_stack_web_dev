@@ -393,15 +393,16 @@
             $("#carousel-play").click(function(){
                 $("#mycarousel").carousel('cycle');
             });
+            $("#login").on('click', function() {
+                $("#loginModal").modal('show');
+            });
+
+            $("#reserve").on('click', function() {
+                $("#reserveModal").modal('show');
+            });
         });
 
-        $("#login").on('click', function() {
-            $("#loginModal").modal('show');
-        });
-
-        $("#reserve").on('click', function() {
-            $("#reserveModal").modal('show');
-        });
+        
     </script>
 </body>
 
