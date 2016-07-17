@@ -55,12 +55,6 @@ module.exports = function (grunt) {
         clean: {
             build: {
                 src: [ 'dist/']
-            },
-            all: {
-                src: [
-                    'Gruntfile.js',
-                    'app/scripts/{,*/}*.js'
-                ]
             }
         }
     });
