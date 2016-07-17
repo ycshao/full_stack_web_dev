@@ -17,13 +17,19 @@ module.exports = function (grunt) {
                 jshintrc: '.jshintrc',
                 reporter: require('jshint-stylish')
             },
-            copy: {
-                dist: {
-                    cwd: 'app',
-                    src: [ '**','!styles/**/*.css','!scripts/**/*.js' ],
-                    dest: 'dist',
-                    expand: true
-                }
+            all: {
+                src: [
+                    'Gruntfile.js',
+                    'app/scripts/{,*/}*.js'
+                ]
+            }
+        },
+        copy: {
+            dist: {
+                cwd: 'app',
+                src: [ '**','!styles/**/*.css','!scripts/**/*.js' ],
+                dest: 'dist',
+                expand: true
             },
             fonts: {
                 files: [
@@ -44,17 +50,17 @@ module.exports = function (grunt) {
                         dest: 'dist'
                     }
                 ]
+            }
+        },
+        clean: {
+            build: {
+                src: [ 'dist/']
             },
-            clean: {
-                build: {
-                    src: [ 'dist/']
-                },
-                all: {
-                    src: [
-                        'Gruntfile.js',
-                        'app/scripts/{,*/}*.js'
-                    ]
-                }
+            all: {
+                src: [
+                    'Gruntfile.js',
+                    'app/scripts/{,*/}*.js'
+                ]
             }
         }
     });
