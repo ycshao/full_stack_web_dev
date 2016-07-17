@@ -147,7 +147,7 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     open: true,
-                    base:{
+                    base: {
                         path: 'dist',
                         options: {
                             index: 'menu.html',
