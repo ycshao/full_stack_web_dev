@@ -167,7 +167,7 @@ angular.module('confusionApp', [])
     
     $scope.submitComment = function () {
         $scope.dish.comments.push({
-            rating: $scope.comment.star,
+            rating: Number($scope.comment.star),
             comment: $scope.comment.commentText,
             author: $scope.comment.name,
             date: new Date().toISOString()
