@@ -31,7 +31,19 @@ angular.module('confusionApp')
         return ($scope.tab === checkTab);
     };
 
-    $scope.dishes = menuFactory.getDishes();
+    $scope.showMenu = false;
+    $scope.message = "Loading ...";
+    $scope.dishes = [];
+    menuFactory.getDishes()
+    .then(
+        function(response) {
+            $scope.dishes = response.data;
+            $scope.showMenu = true;
+        },
+        function(response) {
+            $scope.message = "Error: "+response.status + " " + response.statusText;
+        }
+    );
 
     $scope.toggleDetails = function() {
         $scope.showDetails = !$scope.showDetails;
@@ -76,8 +88,23 @@ angular.module('confusionApp')
 .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 
 function($scope, $stateParams, menuFactory) {
 
-    $scope.dish = menuFactory.getDish(parseInt($stateParams.id, 10));
+    $scope.dish = {};
+    $scope.showDish = false;
     $scope.orderBy = "";
+
+    $scope.dish = {};
+    $scope.showDish = false;
+    $scope.message="Loading ...";
+    menuFactory.getDish(parseInt($stateParams.id,10))
+    .then(
+        function(response) {
+            $scope.dish = response.data;
+            $scope.showDish = true;
+        },
+        function(response) {
+            $scope.message = "Error: "+response.status + " " + response.statusText;
+        }
+    );
 }])
 
 .controller('DishCommentController', ['$scope', function($scope) {
@@ -109,7 +136,19 @@ function($scope, $stateParams, menuFactory) {
 .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', 
 function($scope, menuFactory, corporateFactory) {
     $scope.promotionDish = menuFactory.getPromotion(0);
-    $scope.featuredDish = menuFactory.getDish(0);
+    $scope.featuredDish = {};
+    $scope.showDish = false;
+    $scope.message="Loading ...";
+    menuFactory.getDish(0)
+    .then(
+        function(response){
+            $scope.featuredDish = response.data;
+            $scope.showDish = true;
+        },
+        function(response) {
+            $scope.message = "Error: " + response.status + " " + response.statusText;
+        }
+    );
     $scope.executiveChef = corporateFactory.getLeader(3);
 }])
 
