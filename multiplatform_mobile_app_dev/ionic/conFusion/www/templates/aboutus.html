@@ -12,16 +12,16 @@
         <div class="item item-divider">
             Coorperate Leadership
         </div>
-        <ion-list>
-        <ion-item ng-repeat="leader in leaders">
+        <div class="list list-inset">
+        <div class="item" ng-repeat="leader in leaders">
             <div class="item item-thumbnail-left item-text-wrap item-avatar">
                 <img ng-src="{{baseURL+leader.image}}">
                 <h2><b>{{leader.name}}<br>
                 {{leader.designation}}</b></h2>
                 <p>{{leader.description}}</p>
             </div>
-        </ion-item>
-        </ion-list>
+        </div>
+        </div>
     </div>
   </ion-content>
 </ion-view>
