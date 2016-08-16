@@ -57,7 +57,7 @@ function($scope, menuFactory, baseURL) {
         },
         function(response) {
             $scope.message = "Error: "+response.status + " " + response.statusText;
-        });
+    });
 
                 
     $scope.select = function(setTab) {
@@ -174,9 +174,18 @@ $scope.mycomment = {rating:5, comment:"", author:"", date:""};
     $scope.promotion = menuFactory.getPromotion().get({id:0});
 }])
 
-.controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
-
-    $scope.leaders = corporateFactory.query();
-    console.log($scope.leaders);
+.controller('AboutController', ['$scope', 'corporateFactory', 'baseURL',
+function($scope, corporateFactory, baseURL) {
+    $scope.baseURL = baseURL;
+    $scope.showLeaders = false;
+    $scope.leaders = [];
+    corporateFactory.query(
+        function(response) {
+            $scope.leaders = response;
+            $scope.showLeaders = true;
+        },
+        function(response) {
+            $scope.message = "Error: "+response.status + " " + response.statusText;
+    });
 }])
 ;
