@@ -152,8 +152,8 @@ function($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {
     };
 }])
 
-.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicPopover',
-function($scope, $stateParams, menuFactory, favoriteFactory, baseURL, $ionicPopover) {
+.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicPopover', '$ionicModal',
+function($scope, $stateParams, menuFactory, favoriteFactory, baseURL, $ionicPopover, $ionicModal) {
     $scope.baseURL = baseURL;
     $scope.dish = {};
     $scope.showDish = false;
@@ -186,9 +186,23 @@ function($scope, $stateParams, menuFactory, favoriteFactory, baseURL, $ionicPopo
         $scope.popover.show($event);
     };
 
-    $scope.addFavorite = function(index) {
-        console.log("index is " + index);
-        favoriteFactory.addToFavorites(index);
+    $scope.addFavorite = function() {
+        favoriteFactory.addToFavorites($scope.dish.id);
+        $scope.closePopover();
+    };
+
+    $ionicModal.fromTemplateUrl('templates/dish-comment.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal = modal;
+    });
+    $scope.openCommentModal = function($event) {
+        $scope.modal.show($event);
+        $scope.closePopover();
+    };
+
+    $scope.closeCommentModal = function($event) {
+        $scope.modal.hide();
     };
 }])
 
