@@ -68,12 +68,12 @@ angular.module('conFusion.controllers', [])
     $timeout(function() {
         $scope.closeReserve();
     }, 1000);
-    };    
+    };
 })
 
 .controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicListDelegate',
-function($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {   
-    $scope.baseURL = baseURL;   
+function($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {
+    $scope.baseURL = baseURL;
     $scope.tab = 1;
     $scope.filtText = '';
     $scope.showDetails = false;
@@ -89,10 +89,10 @@ function($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {
             $scope.message = "Error: "+response.status + " " + response.statusText;
     });
 
-                
+
     $scope.select = function(setTab) {
         $scope.tab = setTab;
-        
+
         if (setTab === 2) {
             $scope.filtText = "appetizer";
         }
@@ -128,15 +128,15 @@ function($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {
     var channels = [{value:"tel", label:"Tel."}, {value:"Email",label:"Email"}];
 
     $scope.channels = channels;
-    $scope.invalidChannelSelection = false;       
+    $scope.invalidChannelSelection = false;
 }])
 
 .controller('FeedbackController', ['$scope', 'feedbackFactory', function($scope,feedbackFactory) {
 
     $scope.sendFeedback = function() {
-        
+
         console.log($scope.feedback);
-        
+
         if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
             $scope.invalidChannelSelection = true;
             console.log('incorrect');
@@ -152,8 +152,8 @@ function($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {
     };
 }])
 
-.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL',
-function($scope, $stateParams, menuFactory, baseURL) {
+.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicPopover',
+function($scope, $stateParams, menuFactory, favoriteFactory, baseURL, $ionicPopover) {
     $scope.baseURL = baseURL;
     $scope.dish = {};
     $scope.showDish = false;
@@ -169,6 +169,27 @@ function($scope, $stateParams, menuFactory, baseURL) {
             $scope.message = "Error: "+response.status + " " + response.statusText;
         }
     );
+
+    $ionicPopover.fromTemplateUrl('templates/dish-detail-popover.html', {
+        scope: $scope
+    }).then(function(popover) {
+        $scope.popover = popover;
+    });
+
+    // Triggered in the login modal to close it
+    $scope.closePopover = function() {
+        $scope.popover.hide();
+    };
+
+    // Open the login modal
+    $scope.openPopover = function($event) {
+        $scope.popover.show($event);
+    };
+
+    $scope.addFavorite = function(index) {
+        console.log("index is " + index);
+        favoriteFactory.addToFavorites(index);
+    };
 }])
 
 .controller('DishCommentController', ['$scope', 'menuFactory', function($scope,menuFactory) {
@@ -176,15 +197,15 @@ function($scope, $stateParams, menuFactory, baseURL) {
     $scope.mycomment = {rating:5, comment:"", author:"", date:""};
 
     $scope.submitComment = function () {
-        
+
         $scope.mycomment.date = new Date().toISOString();
         console.log($scope.mycomment);
-        
+
         $scope.dish.comments.push($scope.mycomment);
         menuFactory.getDishes().update({id:$scope.dish.id},$scope.dish);
-        
+
         $scope.commentForm.$setPristine();
-        
+
         $scope.mycomment = {rating:5, comment:"", author:"", date:""};
     }
 }])
@@ -225,7 +246,7 @@ function($scope, corporateFactory, baseURL) {
     });
 }])
 
-.controller('FavoritesController', ['$scope', 'menuFactory', 'favoriteFactory', 
+.controller('FavoritesController', ['$scope', 'menuFactory', 'favoriteFactory',
                                     'baseURL', '$ionicListDelegate', '$ionicPopup',
                                     '$ionicLoading', '$timeout',
 function ($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate, $ionicPopup, $ionicLoading, $timeout) {
@@ -260,7 +281,7 @@ function ($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate, $io
     }
 
     $scope.deleteFavorite = function (index) {
-        
+
         favoriteFactory.deleteFromFavorites(index);
         $scope.shouldShowDelete = false;
     }
