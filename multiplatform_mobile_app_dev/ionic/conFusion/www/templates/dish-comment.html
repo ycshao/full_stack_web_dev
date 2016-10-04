@@ -1,6 +1,6 @@
 <ion-modal-view>
   <ion-header-bar>
-    <h1 class="title">Reserve Table</h1>
+    <h1 class="title">Add Comment</h1>
     <div class="buttons">
       <button class="button" ng-click="closeCommentModal()">Close</button>
     </div>
@@ -11,7 +11,7 @@
         <label class="item item-input item-select">
           <span class="input-label">Rating</span>
             <select ng-model="mycomment.rating">
-                <option ng-repeat="n in [1,2,3,4,5]" value="{{n}}">{{n}}</option>
+                <option ng-repeat="n in [1,2,3,4,5]" value={{n}}>{{n}}</option>
             </select>
         </label>
         <label class="item item-input">

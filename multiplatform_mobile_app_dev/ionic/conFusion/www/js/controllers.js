@@ -215,6 +215,8 @@ function($scope, $stateParams, menuFactory, favoriteFactory, baseURL, $ionicPopo
         $scope.mycomment.date = new Date().toISOString();
         console.log($scope.mycomment);
 
+        $scope.mycomment.rating = parseInt($scope.mycomment.rating,10);
+
         $scope.dish.comments.push($scope.mycomment);
         menuFactory.getDishes().update({id:$scope.dish.id},$scope.dish);
 
