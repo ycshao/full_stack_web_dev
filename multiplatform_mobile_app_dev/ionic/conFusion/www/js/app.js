@@ -69,7 +69,12 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
     views: {
       'mainContent': {
         templateUrl: 'templates/dishdetail.html',
-        controller: 'DishDetailController'
+        controller: 'DishDetailController',
+        resolve: {
+            dish: ['$stateParams','menuFactory', function($stateParams, menuFactory){
+                return menuFactory.get({id:parseInt($stateParams.id, 10)});
+            }]
+        }
       }
     }
   })
@@ -79,7 +84,15 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
       views: {
         'mainContent': {
           templateUrl: 'templates/favorites.html',
-            controller:'FavoritesController'
+          controller:'FavoritesController',
+          resolve: {
+            dishes: ['menuFactory', function(menuFactory){
+                return menuFactory.query();
+            }],
+            favorites: ['favoriteFactory', function(favoriteFactory) {
+                return favoriteFactory.getFavorites();
+            }]
+          }
         }
       }
   })
