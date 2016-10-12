@@ -71,24 +71,15 @@ angular.module('conFusion.controllers', [])
     };
 })
 
-.controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicListDelegate',
-function($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {
+.controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicListDelegate', 'dishes',
+function($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate, dishes) {
     $scope.baseURL = baseURL;
     $scope.tab = 1;
     $scope.filtText = '';
     $scope.showDetails = false;
     $scope.showMenu = false;
     $scope.message = "Loading ...";
-
-    menuFactory.query(
-        function(response) {
-            $scope.dishes = response;
-            $scope.showMenu = true;
-        },
-        function(response) {
-            $scope.message = "Error: "+response.status + " " + response.statusText;
-    });
-
+    $scope.dishes = dishes;
 
     $scope.select = function(setTab) {
         $scope.tab = setTab;
@@ -218,39 +209,20 @@ function($scope, $stateParams, dish, menuFactory, favoriteFactory, baseURL, $ion
 // implement the IndexController and About Controller here
 
 .controller('IndexController', ['$scope', 'menuFactory', 'promotionFactory',
-                                'corporateFactory', 'baseURL',
-function($scope, menuFactory, promotionFactory, corporateFactory, baseURL) {
+                                'corporateFactory', 'baseURL', 'leader', 'dish', 'promotion',
+function($scope, menuFactory, promotionFactory, corporateFactory, baseURL, leader, dish, promotion) {
 
     $scope.baseURL = baseURL;
-    $scope.leader = corporateFactory.get({id:3});
-    $scope.showDish = false;
-    $scope.message="Loading ...";
-    $scope.dish = menuFactory.get({id:0})
-    .$promise.then(
-        function(response){
-            $scope.dish = response;
-            $scope.showDish = true;
-        },
-        function(response) {
-            $scope.message = "Error: "+response.status + " " + response.statusText;
-        }
-    );
-    $scope.promotion = promotionFactory.get({id:0});
+    $scope.leader = leader;
+    $scope.dish = dish;
+    $scope.promotion = promotion;
 }])
 
-.controller('AboutController', ['$scope', 'corporateFactory', 'baseURL',
-function($scope, corporateFactory, baseURL) {
+.controller('AboutController', ['$scope', 'corporateFactory', 'baseURL', 'leaders',
+function($scope, corporateFactory, baseURL, leaders) {
     $scope.baseURL = baseURL;
     $scope.showLeaders = false;
-    $scope.leaders = [];
-    corporateFactory.query(
-        function(response) {
-            $scope.leaders = response;
-            $scope.showLeaders = true;
-        },
-        function(response) {
-            $scope.message = "Error: "+response.status + " " + response.statusText;
-    });
+    $scope.leaders = leaders;
 }])
 
 .controller('FavoritesController', ['$scope', 'dishes', 'favorites', 'favoriteFactory',
