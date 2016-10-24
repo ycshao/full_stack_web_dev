@@ -1,5 +1,5 @@
-angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.services'])
-.run(function($ionicPlatform, $rootScope, $ionicLoading) {
+angular.module('conFusion', ['ionic', 'ngCordova', 'conFusion.controllers','conFusion.services'])
+.run(function($ionicPlatform, $rootScope, $ionicLoading, $cordovaSplashscreen, $timeout) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -12,6 +12,10 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    $timeout(function(){
+        $cordovaSplashscreen.hide();
+    },20000);
   });
 
     $rootScope.$on('loading:show', function () {
