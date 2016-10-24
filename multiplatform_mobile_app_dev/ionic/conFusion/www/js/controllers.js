@@ -337,8 +337,8 @@ function($scope, corporateFactory, baseURL, leaders) {
 
 .controller('FavoritesController', ['$scope', 'dishes', 'favorites', 'favoriteFactory',
                                     'baseURL', '$ionicListDelegate', '$ionicPopup',
-                                    '$ionicLoading', '$timeout',
-function ($scope, dishes, favorites, favoriteFactory, baseURL, $ionicListDelegate, $ionicPopup, $ionicLoading, $timeout) {
+                                    '$ionicLoading', '$timeout', '$cordovaVibration',
+function ($scope, dishes, favorites, favoriteFactory, baseURL, $ionicListDelegate, $ionicPopup, $ionicLoading, $timeout, $cordovaVibration) {
 
     $scope.baseURL = baseURL;
     $scope.shouldShowDelete = false;
@@ -355,6 +355,8 @@ function ($scope, dishes, favorites, favoriteFactory, baseURL, $ionicListDelegat
 
         favoriteFactory.deleteFromFavorites(index);
         $scope.shouldShowDelete = false;
+
+        $cordovaVibration.vibrate(100);
     }
 
     $scope.deleteFavorite = function (index) {
