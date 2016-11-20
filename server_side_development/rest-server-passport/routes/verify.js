@@ -34,3 +34,15 @@ exports.verifyOrdinaryUser = function (req, res, next) {
         return next(err);
     }
 };
+
+exports.verifyAdmin = function (req, res, next) {
+    console.log(req.decoded);
+    if (req.decoded._doc.admin) {
+        next();
+    }
+    else {
+        var err = new Error('You are not authorized to perform this operation!');
+        err.status = 401;
+        next(err);
+    }
+}
